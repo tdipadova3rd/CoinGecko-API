@@ -196,6 +196,21 @@ describe('CoinGecko', function () {
       shared.shouldBeAValidRequest();
     });
 
+    describe('fetchCoinContractMarketChartRange', function () {
+      beforeEach(function (done) {
+        var zrx = '0xe41d2489571d322189246dafa5ebde1f4699f498';
+        this.CoinGeckoClient.coins.fetchCoinContractMarketChartRange(zrx, 'ethereum', {
+          from: 1392577232,
+          to: 1422577232,
+        }).then((data) => {
+          this.data = data;
+          done();
+        });
+      });
+
+      shared.shouldBeAValidRequest();
+    });
+
   });
 
   describe('exchanges', function () {

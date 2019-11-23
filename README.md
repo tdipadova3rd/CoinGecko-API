@@ -355,6 +355,30 @@ let data = await CoinGeckoClient.coins.fetchCoinContractMarketChart(zrx);
 ```
 
 ___
+#### `coins.fetchCoinContractMarketChartRange()`
+Get historical market data include price, market cap, and 24h volume within a range of timestamp (granularity auto).
+
+Official documentation: https://www.coingecko.com/api/documentations/v3#/contract/get_coins__id__contract__contract_address__market_chart_range
+Params:
+
+- `contractAddress`: `String` - (Required) Token’s contract address
+- `assetPlatform`: `String` [default: `ethereum`] -  Asset platform (only `ethereum` is supported at this moment).
+- `params`: `Object` - Parameters to pass through to the request
+- `params.vs_currency`: `String` [default: `usd`] - (Required) The target currency of market data (usd, eur, jpy, etc.)
+- `params.from`: `Number` - (Required) From date in UNIX Timestamp (eg. 1392577232)
+- `params.to`: `Number` - (Required) To date in UNIX Timestamp (eg. 1422577232)
+
+Usage Example:
+```javascript
+// 0x contract address (as a test)
+let zrx = '0xe41d2489571d322189246dafa5ebde1f4699f498';
+let data = await CoinGeckoClient.coins.fetchCoinContractMarketChartRange(zrx, 'ethereum', {
+  from: 1392577232,
+  to: 1422577232,
+});
+```
+
+___
 ### • Exchanges
 Calls related to exchanges.
 
