@@ -625,6 +625,46 @@ let data = await CoinGeckoClient.simple.fetchTokenPrice({
 });
 ```
 
+___
+### • Finance
+Calls related to finance endpoints.
+
+
+#### `finance.fetchPlatforms()`
+List all finance platforms
+
+Official documentation: https://www.coingecko.com/api/documentations/v3#/finance_(beta)/get_finance_platforms
+
+Params:
+
+- `params`: `Object` - Parameters to pass through to the request
+- `params.per_page`: `Number` - Total results per page
+- `params.page`: `Number` - Page of results (paginated to 100 by default)
+
+Usage Example:
+```javascript
+let data = await CoinGeckoClient.finance.fetchPlatforms();
+```
+
+___
+#### `finance.fetchProducts()`
+List all finance products
+
+Official documentation: https://www.coingecko.com/api/documentations/v3#/finance_(beta)/get_finance_products
+
+Params:
+
+- `params`: `Object` - Parameters to pass through to the request
+- `params.per_page`: `Number` - Total results per page
+- `params.page`: `Number` - Page of results (paginated to 100 by default)
+- `params.start_at`: `String` - Start date of the financial products
+- `params.end_at`: `String` - End date of the financial products
+
+Usage Example:
+```javascript
+let data = await CoinGeckoClient.finance.fetchProducts();
+```
+
 ## • Say Hi
 
 Find me on Gab: [@markmiscavage](https://gab.com/markmiscavage).

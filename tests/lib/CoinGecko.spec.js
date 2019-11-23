@@ -403,4 +403,28 @@ describe('CoinGecko', function () {
     });
   });
 
+  describe('finance', function () {
+    describe('fetchPlatforms', function () {
+      beforeEach(function (done) {
+        this.CoinGeckoClient.finance.fetchPlatforms().then((data) => {
+          this.data = data;
+          done();
+        });
+      });
+
+      shared.shouldBeAValidRequest();
+    });
+
+    describe('fetchProducts', function () {
+      beforeEach(function (done) {
+        this.CoinGeckoClient.finance.fetchProducts().then((data) => {
+          this.data = data;
+          done();
+        });
+      });
+
+      shared.shouldBeAValidRequest();
+    });
+  });
+
 });
