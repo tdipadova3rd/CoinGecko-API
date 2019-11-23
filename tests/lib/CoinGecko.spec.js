@@ -143,6 +143,21 @@ describe('CoinGecko', function () {
       shared.shouldBeAValidRequest();
     });
 
+    describe('fetchMarketChartRange', function () {
+      beforeEach(function (done) {
+        this.CoinGeckoClient.coins.fetchMarketChartRange('bitcoin', {
+          vs_currency: 'usd',
+          from: 1392577232,
+          to: 1422577232,
+        }).then((data) => {
+          this.data = data;
+          done();
+        });
+      });
+
+      shared.shouldBeAValidRequest();
+    });
+
     describe('fetchStatusUpdates', function () {
       beforeEach(function (done) {
         this.CoinGeckoClient.coins.fetchStatusUpdates('bitcoin', {

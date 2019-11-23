@@ -276,6 +276,28 @@ let data = await CoinGeckoClient.coins.fetchMarketChart('bitcoin');
 ```
 
 ___
+#### `coins.fetchMarketChartRange()`
+Get historical market data include price, market cap, and 24h volume within a range of timestamp (granularity auto). Minutely data will be used for duration within 1 day. Hourly data will be used for duration between 1 day and 90 days. Daily data will be used for duration above 90 days.
+
+Official documentation: https://www.coingecko.com/api/documentations/v3#/coins/get_coins__id__market_chart_range
+
+Params:
+
+- `coinId`: `String` - (Required) The coin id (can be obtained from `coins.list()`) eg. `bitcoin`
+- `params`: `Object` - Parameters to pass through to the request
+- `params.vs_currency`: `String` [default: `usd`] - The target currency of market data (`usd`, `eur`, `jpy`, etc.)
+- `params.from`: `Number` - (Required) From date in UNIX Timestamp (eg. 1392577232)
+- `params.to`: `Number` - (Required) To date in UNIX Timestamp (eg. 1422577232)
+
+Usage Example:
+```javascript
+let data = await CoinGeckoClient.coins.fetchMarketChartRange('bitcoin', {
+  from: 1392577232,
+  to: 1422577232,
+});
+```
+
+___
 #### `coins.fetchStatusUpdates()`
 Get status updates for a given coin.
 
