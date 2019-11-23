@@ -267,8 +267,8 @@ Params:
 
 - `coinId`: `String` - (Required) The coin id (can be obtained from `coins.list()`) eg. `bitcoin`
 - `params`: `Object` - Parameters to pass through to the request
-- `params.days`: `String` - Data up to number of days ago (eg. `1`, `14`, `30`, `max`)
-- `params.vs_currency`: `String` [default: `usd`] - The target currency of market data (`usd`, `eur`, `jpy`, etc.)
+- `params.days`: `String` [default: `1`] - (Required )Data up to number of days ago (eg. `1`, `14`, `30`, `max`)
+- `params.vs_currency`: `String` [default: `usd`] - (Required) The target currency of market data (`usd`, `eur`, `jpy`, etc.)
 
 Usage Example:
 ```javascript
