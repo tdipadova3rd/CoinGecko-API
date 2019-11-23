@@ -184,6 +184,18 @@ describe('CoinGecko', function () {
       shared.shouldBeAValidRequest();
     });
 
+    describe('fetchCoinContractMarketChart', function () {
+      beforeEach(function (done) {
+        var zrx = '0xe41d2489571d322189246dafa5ebde1f4699f498';
+        this.CoinGeckoClient.coins.fetchCoinContractMarketChart(zrx).then((data) => {
+          this.data = data;
+          done();
+        });
+      });
+
+      shared.shouldBeAValidRequest();
+    });
+
   });
 
   describe('exchanges', function () {
