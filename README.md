@@ -665,6 +665,21 @@ Usage Example:
 let data = await CoinGeckoClient.finance.fetchProducts();
 ```
 
+___
+### • Derivatives
+Calls related to derivative endpoints.
+
+
+#### `derivatives.fetchTickers()`
+List all derivative tickers
+
+Official documentation: https://www.coingecko.com/api/documentations/v3#/operations-tag-derivatives_(beta)
+
+Usage Example:
+```javascript
+let data = await CoinGeckoClient.derivatives.fetchTickers();
+```
+
 ## • Say Hi
 
 Find me on Gab: [@markmiscavage](https://gab.com/markmiscavage).

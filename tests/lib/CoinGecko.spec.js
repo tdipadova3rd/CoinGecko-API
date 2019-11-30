@@ -427,4 +427,18 @@ describe('CoinGecko', function () {
     });
   });
 
+  describe('derivatives', function () {
+    describe('fetchTickers', function () {
+      beforeEach(function (done) {
+        this.CoinGeckoClient.derivatives.fetchTickers().then((data) => {
+          this.data = data;
+          done();
+        });
+      });
+
+      shared.shouldBeAValidRequest();
+    });
+
+  });
+
 });
