@@ -474,6 +474,39 @@ describe('CoinGecko', function () {
       shared.shouldBeAValidRequest();
     });
 
+    describe('allExchanges', function () {
+      before(function (done) {
+        this.CoinGeckoClient.derivatives.allExchanges().then((data) => {
+          this.data = data;
+          done();
+        });
+      });
+
+      shared.shouldBeAValidRequest();
+    });
+
+    describe('fetchExchange', function () {
+      before(function (done) {
+        this.CoinGeckoClient.derivatives.fetchExchange('bitmex').then((data) => {
+          this.data = data;
+          done();
+        });
+      });
+
+      shared.shouldBeAValidRequest();
+    });
+
+    describe('listExchanges', function () {
+      before(function (done) {
+        this.CoinGeckoClient.derivatives.listExchanges().then((data) => {
+          this.data = data;
+          done();
+        });
+      });
+
+      shared.shouldBeAValidRequest();
+    });
+
   });
 
 });

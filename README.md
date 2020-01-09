@@ -730,6 +730,50 @@ Usage Example:
 let data = await CoinGeckoClient.derivatives.fetchTickers();
 ```
 
+#### `derivatives.allExchanges()`
+List all derivative exchanges
+
+Official documentation: https://www.coingecko.com/en/api#operations-derivatives%20(beta)-get_derivatives_exchanges
+
+Params:
+
+- `params`: `Object` - Parameters to pass through to the request
+- `params.order`: `String` - Order results by `CoinGecko.ORDER[*]`
+- `params.per_page`: `Number` - Total results per page
+- `params.page`: `Number` - Page of results
+
+Usage Example:
+```javascript
+let data = await CoinGeckoClient.derivatives.allExchanges();
+```
+
+#### `derivatives.fetchExchange()`
+Show derivative exchange data
+
+Official documentation: https://www.coingecko.com/en/api#operations-derivatives%20(beta)-get_derivatives_exchanges__id_
+
+Params:
+
+- `exchangeId`: `String` - (Required) The exchange id (can be obtained from `derivatives.listExchanges()`)
+- `params`: `Object` - Parameters to pass through to the request
+- `params.include_tickers`: `boolean` - [default: `false`] - Include the tickers information
+
+Usage Example:
+```javascript
+let testExchangeId = 'bitmex'; // as a test
+let data = await CoinGeckoClient.derivatives.fetchExchange(testExchangeId);
+```
+
+#### `derivatives.listExchanges()`
+List all derivative exchanges name and identifier
+
+Official documentation: https://www.coingecko.com/en/api#operations-derivatives%20(beta)-get_derivatives_exchanges_list
+
+Usage Example:
+```javascript
+let data = await CoinGeckoClient.derivatives.listExchanges();
+```
+
 ## • Say Hi
 
 Find me on Gab: [@markmiscavage](https://gab.com/markmiscavage).
