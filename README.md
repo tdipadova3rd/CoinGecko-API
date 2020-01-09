@@ -105,7 +105,7 @@ All calls are returned in the following format:
 }
 ```
 
-The CoinGeckoClient splits up the currently available calls outline in the official CoinGecko API documentation into five parts. (Aside from the `ping` and `global` calls.)
+The CoinGeckoClient splits up the currently available calls outline in the official CoinGecko API documentation into nine (9) parts. (Aside from the `ping` and `global` calls.)
 
 | Namespace | Usage | Description |
 | --- | --- | --- |
@@ -114,6 +114,10 @@ The CoinGeckoClient splits up the currently available calls outline in the offic
 `statusUpdates` | `CoinGeckoClient.statusUpdates[...]` | Calls related to status updates
 `events` | `CoinGeckoClient.events[...]` | Calls related to events
 `exchangeRates` | `CoinGeckoClient.exchangeRates[...]` | Calls related to exchange rates
+`simple` | `CoinGeckoClient.simple[...]` | Calls related to "simple" endpoints
+`finance` | `CoinGeckoClient.finance[...]` | Calls related to finance endpoints
+`indexes` | `CoinGeckoClient.indexes[...]` | Calls related to index endpoints
+`derivatives` | `CoinGeckoClient.derivatives[...]` | Calls related to derivative endpoints
 
 ___
 ### • Ping
