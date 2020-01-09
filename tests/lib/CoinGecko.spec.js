@@ -427,6 +427,41 @@ describe('CoinGecko', function () {
     });
   });
 
+  describe('indexes', function () {
+    describe('all', function () {
+      before(function (done) {
+        this.CoinGeckoClient.indexes.all().then((data) => {
+          this.data = data;
+          done();
+        });
+      });
+
+      shared.shouldBeAValidRequest();
+    });
+
+    describe('fetch', function () {
+      before(function (done) {
+        this.CoinGeckoClient.indexes.fetch('BTC').then((data) => {
+          this.data = data;
+          done();
+        });
+      });
+
+      shared.shouldBeAValidRequest();
+    });
+
+    describe('list', function () {
+      before(function (done) {
+        this.CoinGeckoClient.indexes.list().then((data) => {
+          this.data = data;
+          done();
+        });
+      });
+
+      shared.shouldBeAValidRequest();
+    });
+  });
+
   describe('derivatives', function () {
     describe('fetchTickers', function () {
       before(function (done) {

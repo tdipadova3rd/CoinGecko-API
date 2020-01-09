@@ -666,6 +666,52 @@ let data = await CoinGeckoClient.finance.fetchProducts();
 ```
 
 ___
+### • Indexes
+Calls related to index endpoints.
+
+
+#### `indexes.all()`
+List all market indexes
+
+Official documentation: https://www.coingecko.com/en/api#operations-tag-indexes_(beta)
+
+Params:
+
+- `params`: `Object` - Parameters to pass through to the request
+- `params.per_page`: `Number` - Total results per page
+- `params.page`: `Number` - Page of results (paginated to 100 by default)
+
+Usage Example:
+```javascript
+let data = await CoinGeckoClient.indexes.all();
+```
+
+#### `indexes.fetch()`
+List all market indexes
+
+Official documentation: https://www.coingecko.com/en/api#operations-indexes%20(beta)-get_indexes__id_
+
+Params:
+
+- `indexId`: `String` - (Required) The index id (can be obtained from `indexes.list()`)
+
+Usage Example:
+```javascript
+let testIndexId = 'BTC'; // as a test
+let data = await CoinGeckoClient.indexes.fetch(testIndexId);
+```
+
+#### `indexes.list()`
+List market indexes id and name
+
+Official documentation: https://www.coingecko.com/en/api#operations-indexes%20(beta)-get_indexes_list
+
+Usage Example:
+```javascript
+let data = await CoinGeckoClient.indexes.list();
+```
+
+___
 ### • Derivatives
 Calls related to derivative endpoints.
 
