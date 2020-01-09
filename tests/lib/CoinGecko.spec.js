@@ -10,14 +10,14 @@ const CoinGecko = require('../../lib/CoinGecko');
 const shared = require('../shared');
 
 describe('CoinGecko', function () {
-  beforeEach(function (done) {
+  before(function (done) {
     this.CoinGeckoClient = new CoinGecko();
 
     done();
   });
 
   describe('ping', function () {
-    beforeEach(function (done) {
+    before(function (done) {
       this.CoinGeckoClient.ping().then((data) => {
         this.data = data;
         done();
@@ -28,7 +28,7 @@ describe('CoinGecko', function () {
   });
 
   describe('global', function () {
-    beforeEach(function (done) {
+    before(function (done) {
       this.CoinGeckoClient.global().then((data) => {
         this.data = data;
         done();
@@ -41,7 +41,7 @@ describe('CoinGecko', function () {
   describe('coins', function () {
 
     describe('list', function () {
-      beforeEach(function (done) {
+      before(function (done) {
         this.CoinGeckoClient.coins.list().then((data) => {
           this.data = data;
           done();
@@ -52,7 +52,7 @@ describe('CoinGecko', function () {
     });
 
     describe('all', function () {
-      beforeEach(function (done) {
+      before(function (done) {
         this.CoinGeckoClient.coins.all({
           order: CoinGecko.ORDER.COIN_NAME_ASC,
           per_page: 100,
@@ -69,7 +69,7 @@ describe('CoinGecko', function () {
     });
 
     describe('markets', function () {
-      beforeEach(function (done) {
+      before(function (done) {
         this.CoinGeckoClient.coins.markets({
           vs_currency: 'usd',
           ids: ['bitcoin', 'ethereum', 'ripple'],
@@ -87,7 +87,7 @@ describe('CoinGecko', function () {
     });
 
     describe('fetch', function () {
-      beforeEach(function (done) {
+      before(function (done) {
         this.CoinGeckoClient.coins.fetch('bitcoin', {
           tickers: true,
           market_data: true,
@@ -105,7 +105,7 @@ describe('CoinGecko', function () {
     });
 
     describe('fetchTickers', function () {
-      beforeEach(function (done) {
+      before(function (done) {
         this.CoinGeckoClient.coins.fetchTickers('bitcoin').then((data) => {
           this.data = data;
           done();
@@ -116,7 +116,7 @@ describe('CoinGecko', function () {
     });
 
     describe('fetchHistory', function () {
-      beforeEach(function (done) {
+      before(function (done) {
         this.CoinGeckoClient.coins.fetchHistory('bitcoin', {
           date: '30-12-2017',
           localization: true,
@@ -130,7 +130,7 @@ describe('CoinGecko', function () {
     });
 
     describe('fetchMarketChart', function () {
-      beforeEach(function (done) {
+      before(function (done) {
         this.CoinGeckoClient.coins.fetchMarketChart('bitcoin', {
           vs_currency: 'usd',
           days: 1,
@@ -144,7 +144,7 @@ describe('CoinGecko', function () {
     });
 
     describe('fetchMarketChartRange', function () {
-      beforeEach(function (done) {
+      before(function (done) {
         this.CoinGeckoClient.coins.fetchMarketChartRange('bitcoin', {
           vs_currency: 'usd',
           from: 1392577232,
@@ -159,7 +159,7 @@ describe('CoinGecko', function () {
     });
 
     describe('fetchStatusUpdates', function () {
-      beforeEach(function (done) {
+      before(function (done) {
         this.CoinGeckoClient.coins.fetchStatusUpdates('bitcoin', {
           per_page: 100,
           page: 1,
@@ -173,7 +173,7 @@ describe('CoinGecko', function () {
     });
 
     describe('fetchCoinContractInfo', function () {
-      beforeEach(function (done) {
+      before(function (done) {
         var zrx = '0xe41d2489571d322189246dafa5ebde1f4699f498';
         this.CoinGeckoClient.coins.fetchCoinContractInfo(zrx).then((data) => {
           this.data = data;
@@ -185,7 +185,7 @@ describe('CoinGecko', function () {
     });
 
     describe('fetchCoinContractMarketChart', function () {
-      beforeEach(function (done) {
+      before(function (done) {
         var zrx = '0xe41d2489571d322189246dafa5ebde1f4699f498';
         this.CoinGeckoClient.coins.fetchCoinContractMarketChart(zrx).then((data) => {
           this.data = data;
@@ -197,7 +197,7 @@ describe('CoinGecko', function () {
     });
 
     describe('fetchCoinContractMarketChartRange', function () {
-      beforeEach(function (done) {
+      before(function (done) {
         var zrx = '0xe41d2489571d322189246dafa5ebde1f4699f498';
         this.CoinGeckoClient.coins.fetchCoinContractMarketChartRange(zrx, 'ethereum', {
           from: 1392577232,
@@ -215,7 +215,7 @@ describe('CoinGecko', function () {
 
   describe('exchanges', function () {
     describe('all', function () {
-      beforeEach(function (done) {
+      before(function (done) {
         this.CoinGeckoClient.exchanges.all().then((data) => {
           this.data = data;
           done();
@@ -226,7 +226,7 @@ describe('CoinGecko', function () {
     });
 
     describe('list', function () {
-      beforeEach(function (done) {
+      before(function (done) {
         this.CoinGeckoClient.exchanges.list().then((data) => {
           this.data = data;
           done();
@@ -237,7 +237,7 @@ describe('CoinGecko', function () {
     });
 
     describe('fetch', function () {
-      beforeEach(function (done) {
+      before(function (done) {
         this.CoinGeckoClient.exchanges.fetch('binance').then((data) => {
           this.data = data;
           done();
@@ -248,7 +248,7 @@ describe('CoinGecko', function () {
     });
 
     describe('fetchTickers', function () {
-      beforeEach(function (done) {
+      before(function (done) {
         this.CoinGeckoClient.exchanges.fetchTickers('binance', {
           page: 1,
         }).then((data) => {
@@ -261,7 +261,7 @@ describe('CoinGecko', function () {
     });
 
     describe('fetchStatusUpdates', function () {
-      beforeEach(function (done) {
+      before(function (done) {
         this.CoinGeckoClient.exchanges.fetchStatusUpdates('binance', {
           per_page: 100,
           page: 1,
@@ -275,7 +275,7 @@ describe('CoinGecko', function () {
     });
 
     describe('fetchVolumeChart', function () {
-      beforeEach(function (done) {
+      before(function (done) {
         this.CoinGeckoClient.exchanges.fetchVolumeChart('binance', {
           days: 1,
         }).then((data) => {
@@ -290,7 +290,7 @@ describe('CoinGecko', function () {
 
   describe('statusUpdates', function () {
     describe('all', function () {
-      beforeEach(function (done) {
+      before(function (done) {
         this.CoinGeckoClient.statusUpdates.all({
           category: CoinGecko.STATUS_UPDATE_CATEGORY.EVENT,
           project_type: CoinGecko.STATUS_UPDATE_PROJECT_TYPE.COIN,
@@ -308,7 +308,7 @@ describe('CoinGecko', function () {
 
   describe('events', function () {
     describe('all', function () {
-      beforeEach(function (done) {
+      before(function (done) {
         this.CoinGeckoClient.events.all({
           country_code: 'US',
           type: CoinGecko.EVENT_TYPE.CONFERENCE,
@@ -326,7 +326,7 @@ describe('CoinGecko', function () {
     });
 
     describe('fetchCountries', function () {
-      beforeEach(function (done) {
+      before(function (done) {
         this.CoinGeckoClient.events.fetchCountries().then((data) => {
           this.data = data;
           done();
@@ -337,7 +337,7 @@ describe('CoinGecko', function () {
     });
 
     describe('fetchTypes', function () {
-      beforeEach(function (done) {
+      before(function (done) {
         this.CoinGeckoClient.events.fetchTypes().then((data) => {
           this.data = data;
           done();
@@ -350,7 +350,7 @@ describe('CoinGecko', function () {
 
   describe('exchangeRates', function () {
     describe('all', function () {
-      beforeEach(function (done) {
+      before(function (done) {
         this.CoinGeckoClient.exchangeRates.all().then((data) => {
           this.data = data;
           done();
@@ -363,7 +363,7 @@ describe('CoinGecko', function () {
 
   describe('simple', function () {
     describe('price', function () {
-      beforeEach(function (done) {
+      before(function (done) {
         this.CoinGeckoClient.simple.price({
           vs_currencies: 'usd',
           ids: ['bitcoin', 'ethereum', 'ripple'],
@@ -377,7 +377,7 @@ describe('CoinGecko', function () {
     });
 
     describe('supportedVsCurrencies', function () {
-      beforeEach(function (done) {
+      before(function (done) {
         this.CoinGeckoClient.simple.supportedVsCurrencies().then((data) => {
           this.data = data;
           done();
@@ -388,7 +388,7 @@ describe('CoinGecko', function () {
     });
 
     describe('fetchTokenPrice', function () {
-      beforeEach(function (done) {
+      before(function (done) {
         var zrx = '0xe41d2489571d322189246dafa5ebde1f4699f498';
         this.CoinGeckoClient.simple.fetchTokenPrice({
           contract_addresses: zrx,
@@ -405,7 +405,7 @@ describe('CoinGecko', function () {
 
   describe('finance', function () {
     describe('fetchPlatforms', function () {
-      beforeEach(function (done) {
+      before(function (done) {
         this.CoinGeckoClient.finance.fetchPlatforms().then((data) => {
           this.data = data;
           done();
@@ -416,7 +416,7 @@ describe('CoinGecko', function () {
     });
 
     describe('fetchProducts', function () {
-      beforeEach(function (done) {
+      before(function (done) {
         this.CoinGeckoClient.finance.fetchProducts().then((data) => {
           this.data = data;
           done();
@@ -429,7 +429,7 @@ describe('CoinGecko', function () {
 
   describe('derivatives', function () {
     describe('fetchTickers', function () {
-      beforeEach(function (done) {
+      before(function (done) {
         this.CoinGeckoClient.derivatives.fetchTickers().then((data) => {
           this.data = data;
           done();
