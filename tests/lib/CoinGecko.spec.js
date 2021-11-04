@@ -5,7 +5,7 @@ const chai = require('chai');
 var should = chai.should();
 
 //Helpers
-const CoinGecko = require('../../lib/CoinGecko');
+const CoinGecko = require('../../src/CoinGecko');
 
 const shared = require('../shared');
 
@@ -441,7 +441,7 @@ describe('CoinGecko', function () {
 
     describe('fetch', function () {
       before(function (done) {
-        this.CoinGeckoClient.indexes.fetch('BTC').then((data) => {
+        this.CoinGeckoClient.indexes.fetch('binance_futures', 'BTC').then((data) => {
           this.data = data;
           done();
         });

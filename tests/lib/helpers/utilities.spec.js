@@ -3,7 +3,7 @@ const chai = require('chai');
 var should = chai.should();
 
 //Helpers
-const Utils = require('../../../lib/helpers/utilities');
+const Utils = require('../../../src/helpers/utilities');
 
 const VAR_TYPES = {
   STRING: 'String',
