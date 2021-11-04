@@ -6,7 +6,19 @@ const querystring = require('querystring');
 
 //Helpers
 const Utils = require('./helpers/utilities');
-const ReturnObject = require('./helpers/ReturnObject');
+
+/**
+ * @typedef {Object} ReturnObject
+ * @description - Return object for requests in the class. Helper for reference.
+ * @param {boolean} success - Whether the response status code returned a successful code (>200 && <300)
+ * @param {string} message - The response status message
+ * @param {number} code - The response status code
+ * @param {object|*} data - The body data in json format from the request
+ * @property {boolean} success - Whether the response status code returned a successful code (>200 && <300)
+ * @property {string} message - The response status message
+ * @property {number} code - The response status code
+ * @property {object|*} data - The body data in json format from the request
+ */
 
 /**
  * @class CoinGecko
@@ -16,7 +28,7 @@ const ReturnObject = require('./helpers/ReturnObject');
  *     const CoinGecko = require('coingecko-api-typed');
  *     const CoinGeckoClient = new CoinGecko();
  * @public
- * @version 1.0.18
+ * @version 1.0.19
  * @license MIT
  * @kind class
  */
@@ -869,15 +881,13 @@ class CoinGecko {
             reject(error);
           };
 
-          //Create return object
-          resolve(
-            ReturnObject(
-              !(res.statusCode < 200 || res.statusCode >= 300),
-              res.statusMessage,
-              res.statusCode,
-              body
-            )
-          );
+          // Create return object
+          resolve({
+            success: !(res.statusCode < 200 || res.statusCode >= 300),
+            message: res.statusMessage, 
+            code: res.statusCode, 
+            data: body 
+          });
         });
       });
 
