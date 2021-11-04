@@ -1,14 +1,14 @@
 # CoinGecko API Client for Node.js
 
 <!-- <span class="badge-travisci"><a href="http://travis-ci.org/miscavage/CoinGecko-API" title="Check this project's build status on TravisCI"><img src="https://img.shields.io/travis/miscavage/CoinGecko-API/master.svg" alt="Travis CI Build Status" /></a></span> -->
-<span class="badge-npmversion"><a href="https://npmjs.org/package/coingecko-api" title="View this project on NPM"><img src="https://img.shields.io/npm/v/coingecko-api-typed.svg" alt="NPM version"/></a></span>
-<span class="badge-npmdownloads"><a href="https://npmjs.org/package/coingecko-api" title="View this project on NPM"><img src="https://img.shields.io/npm/dm/coingecko-api-typed.svg" alt="NPM downloads" /></a></span>
+<span class="badge-npmversion"><a href="https://npmjs.org/package/coingecko-api-typed" title="View this project on NPM"><img src="https://img.shields.io/npm/v/coingecko-api-typed.svg" alt="NPM version"/></a></span>
+<span class="badge-npmdownloads"><a href="https://npmjs.org/package/coingecko-api-typed" title="View this project on NPM"><img src="https://img.shields.io/npm/dm/coingecko-api-typed.svg" alt="NPM downloads" /></a></span>
 
 A Node.js wrapper for the CoinGecko API with no dependencies.
 
 ## • Installation
 
-Latest version: 1.0.12
+Latest version: 1.0.13
 
 `npm install coingecko-api-typed`
 
@@ -19,7 +19,7 @@ For complete API documentation, up-to-date parameters, responses and errors, ple
 ## • Quick Start Example
 
 ```javascript
-//1. Import coingecko-api
+//1. Import coingecko-api-typed
 const CoinGecko = require('coingecko-api-typed');
 
 //2. Initiate the CoinGecko API Client
