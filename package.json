@@ -1,6 +1,6 @@
 {
   "name": "coingecko-api-typed",
-  "version": "1.0.15",
+  "version": "1.0.16",
   "description": "A Node.js wrapper for the CoinGecko API with no dependencies (with generated inline d.ts typings!).",
   "main": "lib/index.js",
   "homepage": "https://github.com/stu-dev/CoinGecko-API",

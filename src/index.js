@@ -17,7 +17,7 @@ const ReturnObject = require('./helpers/ReturnObject');
  *     const CoinGecko = require('coingecko-api-typed');
  *     const CoinGeckoClient = new CoinGecko();
  * @public
- * @version 1.0.15
+ * @version 1.0.16
  * @license MIT
  * @kind class
  */
