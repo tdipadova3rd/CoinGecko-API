@@ -17,7 +17,7 @@ const ReturnObject = require('./helpers/ReturnObject');
  *     const CoinGecko = require('coingecko-api-typed');
  *     const CoinGeckoClient = new CoinGecko();
  * @public
- * @version 1.0.10
+ * @version 1.0.15
  * @license MIT
  * @kind class
  */
@@ -908,4 +908,5 @@ CoinGecko.TIMEOUT = Constants.TIMEOUT;
 
 //
 
-module.exports = exports = CoinGecko;
+module.exports = CoinGecko;
+module.exports.default = CoinGecko;
