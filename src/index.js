@@ -6,18 +6,29 @@ const querystring = require('querystring');
 
 //Helpers
 const Utils = require('./helpers/utilities');
-const Constants = require('./helpers/constants');
-const ReturnObject = require('./helpers/ReturnObject');
+
+/**
+ * @typedef {Object} ReturnObject
+ * @description - Return object for requests in the class. Helper for reference.
+ * @param {boolean} success - Whether the response status code returned a successful code (>200 && <300)
+ * @param {string} message - The response status message
+ * @param {number} code - The response status code
+ * @param {object|*} data - The body data in json format from the request
+ * @property {boolean} success - Whether the response status code returned a successful code (>200 && <300)
+ * @property {string} message - The response status message
+ * @property {number} code - The response status code
+ * @property {object|*} data - The body data in json format from the request
+ */
 
 /**
  * @class CoinGecko
  * @author Mark Miscavage <markmiscavage@protonmail.com>
  * @description A Node.js wrapper for the CoinGecko API with no dependencies. For more information, visit: https://www.coingecko.com/api/docs/v3
  * @example
- *     const CoinGecko = require('coingecko-api');
+ *     const CoinGecko = require('coingecko-api-typed');
  *     const CoinGeckoClient = new CoinGecko();
  * @public
- * @version 1.0.10
+ * @version 1.0.19
  * @license MIT
  * @kind class
  */
@@ -26,7 +37,7 @@ class CoinGecko {
   /**
    * @description Check API server status
    * @function ping
-   * @returns {ReturnObject}
+   * @returns {Promise<ReturnObject>}
    */
   ping() {
     const path = `/ping`;
@@ -37,7 +48,7 @@ class CoinGecko {
   /**
    * @description Get cryptocurrency global data
    * @function global
-   * @returns {ReturnObject}
+   * @returns {Promise<ReturnObject>}
    */
   global() {
     const path = `/global`;
@@ -62,7 +73,7 @@ class CoinGecko {
        * @param {number} params.page - Page through results
        * @param {boolean} params.localization [default: true] - Set to false to exclude localized languages in response
        * @param {boolean} params.sparkline [default: false] - Include sparkline 7 days data
-       * @returns {ReturnObject}
+       * @returns {Promise<ReturnObject>}
        */
       all: (params = {}) => {
         const path = `/${pathPrefix}`;
@@ -73,7 +84,7 @@ class CoinGecko {
       /**
        * @description Use this to obtain all the coins’ id in order to make API calls
        * @function coins.list()
-       * @returns {ReturnObject}
+       * @returns {Promise<ReturnObject>}
        */
       list: () => {
         const path = `/${pathPrefix}/list`;
@@ -91,7 +102,7 @@ class CoinGecko {
        * @param {number} params.per_page - Total results per page
        * @param {number} params.page - Page through results
        * @param {boolean} params.sparkline [default: false] - Include sparkline 7 days data (true/false)
-       * @returns {ReturnObject}
+       * @returns {Promise<ReturnObject>}
        */
       markets: (params = {}) => {
         const path = `/${pathPrefix}/markets`;
@@ -124,7 +135,7 @@ class CoinGecko {
        * @param {boolean} params.developer_data [default: true] - Include developer data
        * @param {boolean} params.localization [default: true] - Set to false to exclude localized languages in response
        * @param {boolean} params.sparkline [default: false] - Include sparkline 7 days data (true/false)
-       * @returns {ReturnObject}
+       * @returns {Promise<ReturnObject>}
        */
       fetch: (coinId, params = {}) => {
         //Must have coinId
@@ -143,7 +154,7 @@ class CoinGecko {
        * @param {string} params.page - Page through results
        * @param {number} params.exchange_ids - Filter tickers by exchange_ids
        * @param {string} params.order [default: trust_score_desc] - Order results by CoinGecko.ORDER.TRUST_SCORE_DESC or CoinGecko.ORDER.VOLUME_DESC
-       * @returns {ReturnObject}
+       * @returns {Promise<ReturnObject>}
        */
       fetchTickers: (coinId, params = {}) => {
         //Must have coinId
@@ -166,7 +177,7 @@ class CoinGecko {
        * @param {object} params - Parameters to pass through to the request
        * @param {string} params.date - (Required) The date of data snapshot in dd-mm-yyyy eg. 30-12-2017
        * @param {boolean} params.localization [default: true] - Set to false to exclude localized languages in response
-       * @returns {ReturnObject}
+       * @returns {Promise<ReturnObject>}
        */
       fetchHistory: (coinId, params = {}) => {
         //Must have coinId
@@ -190,7 +201,7 @@ class CoinGecko {
        * @param {object} params - Parameters to pass through to the request
        * @param {string} params.vs_currency [default: usd] - (Required) The target currency of market data (usd, eur, jpy, etc.)
        * @param {string} params.days [default: 1] - (Required) Data up to number of days ago (eg. 1,14,30,max)
-       * @returns {ReturnObject}
+       * @returns {Promise<ReturnObject>}
        */
       fetchMarketChart: (coinId, params = {}) => {
         //Must have coinId
@@ -225,7 +236,7 @@ class CoinGecko {
        * @param {string} params.vs_currency [default: usd] - (Required) The target currency of market data (usd, eur, jpy, etc.)
        * @param {number} params.from - (Required) From date in UNIX Timestamp (eg. 1392577232)
        * @param {number} params.to - (Required) To date in UNIX Timestamp (eg. 1422577232)
-       * @returns {ReturnObject}
+       * @returns {Promise<ReturnObject>}
        */
       fetchMarketChartRange: (coinId, params = {}) => {
         //Must have coinId
@@ -254,7 +265,7 @@ class CoinGecko {
        * @param {object} params - Parameters to pass through to the request
        * @param {number} params.per_page - Total results per page
        * @param {number} params.page - Page through results
-       * @returns {ReturnObject}
+       * @returns {Promise<ReturnObject>}
        */
       fetchStatusUpdates: (coinId, params = {}) => {
         //Must have coinId
@@ -270,7 +281,7 @@ class CoinGecko {
        * @function coins.fetchCoinContractInfo()
        * @param {object} contractAddress - (Required) Token’s contract address
        * @param {string} assetPlatform [default: ethereum] - (Required) Asset platform (only ethereum is supported at this moment)
-       * @returns {ReturnObject}
+       * @returns {Promise<ReturnObject>}
        */
       fetchCoinContractInfo: (contractAddress, assetPlatform = 'ethereum') => {
         //Must have contractAddress, assetPlatform
@@ -290,7 +301,7 @@ class CoinGecko {
        * @param {object} params - Parameters to pass through to the request
        * @param {string} params.vs_currency [default: usd] - (Required) The target currency of market data (usd, eur, jpy, etc.)
        * @param {string} params.days [default: 1] - (Required) Data up to number of days ago (eg. 1,14,30,max)
-       * @returns {ReturnObject}
+       * @returns {Promise<ReturnObject>}
        */
       fetchCoinContractMarketChart: (contractAddress, assetPlatform = 'ethereum', params = {}) => {
         //Must have contractAddress, assetPlatform
@@ -324,7 +335,7 @@ class CoinGecko {
        * @param {string} params.vs_currency [default: usd] - (Required) The target currency of market data (usd, eur, jpy, etc.)
        * @param {number} params.from - (Required) From date in UNIX Timestamp (eg. 1392577232)
        * @param {number} params.to - (Required) To date in UNIX Timestamp (eg. 1422577232)
-       * @returns {ReturnObject}
+       * @returns {Promise<ReturnObject>}
        */
       fetchCoinContractMarketChartRange: (contractAddress, assetPlatform = 'ethereum', params = {}) => {
         //Must have contractAddress, assetPlatform
@@ -362,7 +373,7 @@ class CoinGecko {
       /**
        * @description List all exchanges
        * @function exchanges.all()
-       * @returns {ReturnObject}
+       * @returns {Promise<ReturnObject>}
        */
       all: () => {
         const path = `/${pathPrefix}`;
@@ -373,7 +384,7 @@ class CoinGecko {
       /**
        * @description List all supported markets id and name
        * @function exchanges.list()
-       * @returns {ReturnObject}
+       * @returns {Promise<ReturnObject>}
        */
       list: () => {
         const path = `/${pathPrefix}/list`;
@@ -385,7 +396,7 @@ class CoinGecko {
        * @description Get exchange volume in BTC and top 100 tickers only for a given exchange
        * @function exchanges.fetch()
        * @param {string} exchangeId - (Required) The exchange id (can be obtained from exchanges.all()) eg. binance
-       * @returns {ReturnObject}
+       * @returns {Promise<ReturnObject>}
        */
       fetch: (exchangeId) => {
         //Must have exchangeId
@@ -404,7 +415,7 @@ class CoinGecko {
        * @param {number} params.page - Page through results
        * @param {number} params.coin_ids - Filter tickers by coin_ids
        * @param {string} params.order [default: trust_score_desc] - Order results by CoinGecko.ORDER.TRUST_SCORE_DESC or CoinGecko.ORDER.VOLUME_DESC
-       * @returns {ReturnObject}
+       * @returns {Promise<ReturnObject>}
        */
       fetchTickers: (exchangeId, params = {}) => {
         //Must have exchangeId
@@ -427,7 +438,7 @@ class CoinGecko {
        * @param {object} params - Parameters to pass through to the request
        * @param {number} params.per_page - Total results per page
        * @param {number} params.page - Page through results
-       * @returns {ReturnObject}
+       * @returns {Promise<ReturnObject>}
        */
       fetchStatusUpdates: (exchangeId, params = {}) => {
         //Must have exchangeId
@@ -444,7 +455,7 @@ class CoinGecko {
        * @param {string} exchangeId - (Required) The exchange id (can be obtained from exchanges.all()) eg. binance
        * @param {object} params - Parameters to pass through to the request
        * @param {number} params.days - Data up to number of days ago (eg. 1, 14, 30)
-       * @returns {ReturnObject}
+       * @returns {Promise<ReturnObject>}
        */
       fetchVolumeChart: (exchangeId, params = {}) => {
         //Must have exchangeId
@@ -471,7 +482,7 @@ class CoinGecko {
        * @param {number} params.project_type - Filter results by CoinGecko.STATUS_UPDATE_PROJECT_TYPE[*] (If left empty returns both status from coins and markets)
        * @param {number} params.per_page - Total results per page
        * @param {number} params.page - Page through results
-       * @returns {ReturnObject}
+       * @returns {Promise<ReturnObject>}
        */
       all: (params = {}) => {
         const path = `/status_updates`;
@@ -499,7 +510,7 @@ class CoinGecko {
        * @param {boolean} params.upcoming_events_only [default: true] - Lists only upcoming events
        * @param {string} params.from_date - Lists events after this date yyyy-mm-dd
        * @param {string} params.to_date - Lists events before this date yyyy-mm-dd (set upcoming_events_only to false if fetching past events)
-       * @returns {ReturnObject}
+       * @returns {Promise<ReturnObject>}
        */
       all: (params = {}) => {
         const path = `/${pathPrefix}`;
@@ -510,7 +521,7 @@ class CoinGecko {
       /**
        * @description Get list of event countries
        * @function events.fetchCountries()
-       * @returns {ReturnObject}
+       * @returns {Promise<ReturnObject>}
        */
       fetchCountries: () => {
         const path = `/${pathPrefix}/countries`;
@@ -521,7 +532,7 @@ class CoinGecko {
       /**
        * @description Get list of event types
        * @function events.fetchTypes()
-       * @returns {ReturnObject}
+       * @returns {Promise<ReturnObject>}
        */
       fetchTypes: () => {
         const path = `/${pathPrefix}/types`;
@@ -540,7 +551,7 @@ class CoinGecko {
       /**
        * @description Get BTC-to-Currency exchange rates
        * @function exchangeRates.all()
-       * @returns {ReturnObject}
+       * @returns {Promise<ReturnObject>}
        */
       all: () => {
         const path = `/exchange_rates`;
@@ -564,7 +575,7 @@ class CoinGecko {
        * @param {array|string} params.vs_currencies [default: usd] - A single id or a list of ids. Use simple.supportedVsCurrencies() for a list of vsCurrency ids.
        * @param {boolean} params.include_24hr_vol [default: false] - To include 24hr_vol (true/false)
        * @param {boolean} params.include_last_updated_at [default: false] - To include last_updated_at of price (true/false)
-       * @returns {ReturnObject}
+       * @returns {Promise<ReturnObject>}
        */
       price: (params = {}) => {
         //Must be object
@@ -600,7 +611,7 @@ class CoinGecko {
       /**
        * @description Get list of supported vs/comparisons currencies
        * @function simple.supportedVsCurrencies()
-       * @returns {ReturnObject}
+       * @returns {Promise<ReturnObject>}
        */
       supportedVsCurrencies: () => {
         const path = `/simple/supported_vs_currencies`;
@@ -619,7 +630,7 @@ class CoinGecko {
        * @param {boolean} params.include_24hr_vol [default: false] - Include 24hr volume in results or not
        * @param {boolean} params.include_24hr_change [default: false] - Include 24hr change in results or not
        * @param {boolean} params.include_last_updated_at [default: false] - Include last updated date in results or not
-       * @returns {ReturnObject}
+       * @returns {Promise<ReturnObject>}
        */
       fetchTokenPrice: (params = {}, assetPlatform = 'ethereum') => {
         //Must be object
@@ -659,7 +670,7 @@ class CoinGecko {
        * @param {object} params - Parameters to pass through to the request
        * @param {number} params.per_page - Total results per page
        * @param {number} params.page - Page of results (paginated to 100 by default)
-       * @returns {ReturnObject}
+       * @returns {Promise<ReturnObject>}
        */
       fetchPlatforms: (params = {}) => {
         const path = `/finance_platforms`;
@@ -675,7 +686,7 @@ class CoinGecko {
        * @param {number} params.page - Page of results (paginated to 100 by default)
        * @param {string} params.start_at - Start date of the financial products
        * @param {string} params.end_at - End date of the financial products
-       * @returns {ReturnObject}
+       * @returns {Promise<ReturnObject>}
        */
       fetchProducts: (params = {}) => {
         const path = `/finance_products`;
@@ -698,7 +709,7 @@ class CoinGecko {
        * @param {object} params - Parameters to pass through to the request
        * @param {number} params.per_page - Total results per page
        * @param {number} params.page - Page of results
-       * @returns {ReturnObject}
+       * @returns {Promise<ReturnObject>}
        */
       all: (params = {}) => {
         const path = `/${pathPrefix}`;
@@ -709,14 +720,17 @@ class CoinGecko {
       /**
        * @description Fetch market index by id
        * @function indexes.fetch()
+       * @param {string} marketId - (Required) The market id (can be obtained from exchanges.list())
        * @param {string} indexId - (Required) The index id (can be obtained from indexes.list())
-       * @returns {ReturnObject}
+       * @returns {Promise<ReturnObject>}
        */
-      fetch: (indexId) => {
+      fetch: (marketId, indexId) => {
+        //Must have marketId
+        if (!Utils.isString(marketId) || Utils.isStringEmpty(marketId)) Utils._WARN_('Invalid parameter', 'marketId must be of type: String and greater than 0 characters.');
         //Must have indexId
         if (!Utils.isString(indexId) || Utils.isStringEmpty(indexId)) Utils._WARN_('Invalid parameter', 'indexId must be of type: String and greater than 0 characters.');
 
-        const path = `/${pathPrefix}/${indexId}`;
+        const path = `/${pathPrefix}/${marketId}/${indexId}`;
 
         return this._request(path);
       },
@@ -724,7 +738,7 @@ class CoinGecko {
       /**
        * @description List market indexes id and name
        * @function indexes.list()
-       * @returns {ReturnObject}
+       * @returns {Promise<ReturnObject>}
        */
       list: () => {
         const path = `/${pathPrefix}/list`;
@@ -745,7 +759,7 @@ class CoinGecko {
       /**
        * @description List all derivative tickers
        * @function derivatives.fetchTickers()
-       * @returns {ReturnObject}
+       * @returns {Promise<ReturnObject>}
        */
       fetchTickers: () => {
         const path = `/${pathPrefix}`;
@@ -760,7 +774,7 @@ class CoinGecko {
        * @param {string} params.order - Order results by CoinGecko.ORDER[*]
        * @param {number} params.per_page - Total results per page
        * @param {number} params.page - Page of results
-       * @returns {ReturnObject}
+       * @returns {Promise<ReturnObject>}
        */
       allExchanges: (params = {}) => {
         const path = `/${pathPrefix}/exchanges`;
@@ -774,7 +788,7 @@ class CoinGecko {
        * @param {string} exchangeId - (Required) The exchange id (can be obtained from derivatives.listExchanges()) e.g. bitmex
        * @param {object} params - Parameters to pass through to the request
        * @param {boolean} params.include_tickers [default: false] - Include the tickers information
-       * @returns {ReturnObject}
+       * @returns {Promise<ReturnObject>}
        */
       fetchExchange: (exchangeId, params = {}) => {
         //Must have exchangeId
@@ -788,7 +802,7 @@ class CoinGecko {
       /**
        * @description List all derivative exchanges name and identifier
        * @function derivatives.listExchanges()
-       * @returns {ReturnObject}
+       * @returns {Promise<ReturnObject>}
        */
       listExchanges: () => {
         const path = `/${pathPrefix}/exchanges/list`;
@@ -813,14 +827,14 @@ class CoinGecko {
 
     //Make relative path
     //Check if has params, append accordingly
-    if (params == undefined) path = `/api/v${Constants.API_VERSION}${path}`;
-    else path = `/api/v${Constants.API_VERSION}${path}?${params}`;
+    if (params == undefined) path = `/api/v${API_VERSION}${path}`;
+    else path = `/api/v${API_VERSION}${path}?${params}`;
 
     //Return options
     return {
       path,
       method: 'GET',
-      host: Constants.HOST,
+      host: HOST,
       port: 443,
       timeout: CoinGecko.TIMEOUT,
     };
@@ -832,7 +846,7 @@ class CoinGecko {
    * @protected
    * @param {string} path - Relative path for API
    * @param {object} params - Object representing query strings for url parameters
-   * @returns {Promise} Body of https request data results
+   * @returns {Promise<ReturnObject>} Body of https request data results
    */
   _request(path, params) {
     let options = this._buildRequestOptions(path, params);
@@ -867,15 +881,13 @@ class CoinGecko {
             reject(error);
           };
 
-          //Create return object
-          resolve(
-            ReturnObject(
-              !(res.statusCode < 200 || res.statusCode >= 300),
-              res.statusMessage,
-              res.statusCode,
-              body
-            )
-          );
+          // Create return object
+          resolve({
+            success: !(res.statusCode < 200 || res.statusCode >= 300),
+            message: res.statusMessage, 
+            code: res.statusCode, 
+            data: body 
+          });
         });
       });
 
@@ -894,15 +906,112 @@ class CoinGecko {
   };
 };
 
+/**
+ * @description The base url for the CoinGecko API
+ * @kind constant
+ */
+ const BASE = 'https://api.coingecko.com/api/';
+
+ /**
+  * @description The host of the CoinGecko API
+  * @kind constant
+  */
+ const HOST = 'api.coingecko.com';
+ 
+ /**
+  * @description The current version for the CoinGecko API
+  * @kind constant
+  */
+ const API_VERSION = '3';
+ 
+ /**
+  * @description The CoinGecko URI according to base and current version
+  * @kind constant
+  */
+ const URI = `${BASE}v${API_VERSION}`;
+ 
+ /**
+  * @description The maximum number of requests per second for the CoinGecko API
+  * @kind constant
+  */
+ const REQUESTS_PER_SECOND = 10;
+ 
+ /**
+  * @description Timeout for connecton to CoinGecko API in milliseconds (default: 30 seconds)
+  * @kind constant
+  */
+ const TIMEOUT = 30000;
+ 
+ /**
+  * @description Available options to order results by
+  * @kind constant
+  */
+ const ORDER = {
+   GECKO_ASC: 'gecko_asc',
+   GECKO_DESC: 'gecko_desc',
+   MARKET_CAP_ASC: 'market_cap_asc',
+   MARKET_CAP_DESC: 'market_cap_desc',
+   VOLUME_ASC: 'volume_asc',
+   VOLUME_DESC: 'volume_desc',
+   COIN_NAME_ASC: 'coin_name_asc',
+   COIN_NAME_DESC: 'coin_name_desc',
+   PRICE_ASC: 'price_asc',
+   PRICE_DESC: 'price_desc',
+   HOUR_24_ASC: 'h24_change_asc',
+   HOUR_24_DESC: 'h24_change_desc',
+   TRUST_SCORE_DESC: 'trust_score_desc',
+   NAME_ASC: 'name_asc',
+   NAME_DESC: 'name_desc',
+   OPEN_INTEREST_BTC_ASC: 'open_interest_btc_asc',
+   OPEN_INTEREST_BTC_DESC: 'open_interest_btc_desc',
+   TRADE_VOLUME_24H_BTC_ASC: 'trade_volume_24h_btc_asc',
+   TRADE_VOLUME_24H_BTC_DESC: 'trade_volume_24h_btc_desc',
+ };
+ 
+ /**
+  * @description Available status update category types to filter by
+  * @kind constant
+  */
+ const STATUS_UPDATE_CATEGORY = {
+   GENERAL: 'general',
+   MILESTONE: 'milestone',
+   PARTNERSHIP: 'partnership',
+   EXCHANGE_LISTING: 'exchange_listing',
+   SOFTWARE_RELEASE: 'software_release',
+   FUND_MOVEMENT: 'fund_movement',
+   NEW_LISTINGS: 'new_listings',
+   EVENT: 'event',
+ };
+ 
+ /**
+  * @description Available project type options to filter by
+  * @kind constant
+  */
+ const STATUS_UPDATE_PROJECT_TYPE = {
+   COIN: 'coin',
+   MARKET: 'market',
+ }
+ 
+ /**
+  * @description List of event types (most recent from /events/type)
+  * @kind constant
+  */
+ const EVENT_TYPE = {
+   EVENT: 'Event',
+   CONFERENCE: 'Conference',
+   MEETUP: 'Meetup',
+ };
+
 //Set Constants
-CoinGecko.API_VERSION = Constants.API_VERSION;
-CoinGecko.REQUESTS_PER_SECOND = Constants.REQUESTS_PER_SECOND;
-CoinGecko.ORDER = Constants.ORDER;
-CoinGecko.STATUS_UPDATE_CATEGORY = Constants.STATUS_UPDATE_CATEGORY;
-CoinGecko.STATUS_UPDATE_PROJECT_TYPE = Constants.STATUS_UPDATE_PROJECT_TYPE;
-CoinGecko.EVENT_TYPE = Constants.EVENT_TYPE;
-CoinGecko.TIMEOUT = Constants.TIMEOUT;
+CoinGecko.API_VERSION = API_VERSION;
+CoinGecko.REQUESTS_PER_SECOND = REQUESTS_PER_SECOND;
+CoinGecko.ORDER = ORDER;
+CoinGecko.STATUS_UPDATE_CATEGORY = STATUS_UPDATE_CATEGORY;
+CoinGecko.STATUS_UPDATE_PROJECT_TYPE = STATUS_UPDATE_PROJECT_TYPE;
+CoinGecko.EVENT_TYPE = EVENT_TYPE;
+CoinGecko.TIMEOUT = TIMEOUT;
 
 //
 
-module.exports = exports = CoinGecko;
+module.exports = CoinGecko;
+module.exports.default = CoinGecko;
