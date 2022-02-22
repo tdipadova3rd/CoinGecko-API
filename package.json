@@ -13,10 +13,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stu-dev/CoinGecko-API.git"
+    "url": "git+https://github.com/tdipadova3rd/CoinGecko-API.git"
   },
   "bugs": {
-    "url": "https://github.com/stu-dev/CoinGecko-API/issues"
+    "url": "https://github.com/tdipadova3rd/CoinGecko-API/issues"
   },
   "keywords": [
     "coingecko",
