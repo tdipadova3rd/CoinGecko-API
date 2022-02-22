@@ -259,24 +259,6 @@ class CoinGecko {
       },
 
       /**
-       * @description Get status updates for a given coin
-       * @function coins.fetchStatusUpdates()
-       * @param {string} coinId - (Required) The coin id (can be obtained from coins.list()) eg. bitcoin
-       * @param {object} params - Parameters to pass through to the request
-       * @param {number} params.per_page - Total results per page
-       * @param {number} params.page - Page through results
-       * @returns {Promise<ReturnObject>}
-       */
-      fetchStatusUpdates: (coinId, params = {}) => {
-        //Must have coinId
-        if (!Utils.isString(coinId) || Utils.isStringEmpty(coinId)) Utils._WARN_('Invalid parameter', 'coinId must be of type: String and greater than 0 characters.');
-
-        const path = `/${pathPrefix}/${coinId}/status_updates`;
-
-        return this._request(path, params);
-      },
-
-      /**
        * @description Get coin info from contract address
        * @function coins.fetchCoinContractInfo()
        * @param {object} contractAddress - (Required) Token’s contract address
@@ -432,24 +414,6 @@ class CoinGecko {
       },
 
       /**
-       * @description Get status updates for a given exchange
-       * @function exchanges.fetchStatusUpdates()
-       * @param {string} exchangeId - (Required) The exchange id (can be obtained from exchanges.all()) eg. binance
-       * @param {object} params - Parameters to pass through to the request
-       * @param {number} params.per_page - Total results per page
-       * @param {number} params.page - Page through results
-       * @returns {Promise<ReturnObject>}
-       */
-      fetchStatusUpdates: (exchangeId, params = {}) => {
-        //Must have exchangeId
-        if (!Utils.isString(exchangeId) || Utils.isStringEmpty(exchangeId)) Utils._WARN_('Invalid parameter', 'exchangeId must be of type: String and greater than 0 characters.');
-
-        const path = `/${pathPrefix}/${exchangeId}/status_updates`;
-
-        return this._request(path, params);
-      },
-
-      /**
        * @description Get volume chart data for a given exchange, returned in BTC
        * @function exchanges.fetchVolumeChart()
        * @param {string} exchangeId - (Required) The exchange id (can be obtained from exchanges.all()) eg. binance
@@ -464,80 +428,6 @@ class CoinGecko {
         const path = `/${pathPrefix}/${exchangeId}/volume_chart`;
 
         return this._request(path, params);
-      },
-    };
-  };
-
-  /**
-   * @description Calls related to status updates
-   */
-  get statusUpdates() {
-    return {
-
-      /**
-       * @description List all status_updates with data (description, category, created_at, user, user_title and pin)
-       * @function statusUpdates.all()
-       * @param {object} params - Parameters to pass through to the request
-       * @param {number} params.category - Filter results by CoinGecko.STATUS_UPDATE_CATEGORY[*]
-       * @param {number} params.project_type - Filter results by CoinGecko.STATUS_UPDATE_PROJECT_TYPE[*] (If left empty returns both status from coins and markets)
-       * @param {number} params.per_page - Total results per page
-       * @param {number} params.page - Page through results
-       * @returns {Promise<ReturnObject>}
-       */
-      all: (params = {}) => {
-        const path = `/status_updates`;
-
-        return this._request(path, params);
-      },
-    };
-  };
-
-  /**
-   * @description Calls related to events
-   */
-  get events() {
-    const pathPrefix = 'events';
-
-    return {
-
-      /**
-       * @description Get events, paginated by 100
-       * @function events.all()
-       * @param {object} params - Parameters to pass through to the request
-       * @param {number} params.country_code - country_code of event (eg. ‘US’). Use events.fetchHistory() for list of country_codes
-       * @param {string} params.type - Type of event (eg.‘Conference’). Use events.fetchTypes() for list of types. Or use CoinGecko.EVENT_TYPE[*]
-       * @param {number} params.page - Page of results (paginated by 100)
-       * @param {boolean} params.upcoming_events_only [default: true] - Lists only upcoming events
-       * @param {string} params.from_date - Lists events after this date yyyy-mm-dd
-       * @param {string} params.to_date - Lists events before this date yyyy-mm-dd (set upcoming_events_only to false if fetching past events)
-       * @returns {Promise<ReturnObject>}
-       */
-      all: (params = {}) => {
-        const path = `/${pathPrefix}`;
-
-        return this._request(path, params);
-      },
-
-      /**
-       * @description Get list of event countries
-       * @function events.fetchCountries()
-       * @returns {Promise<ReturnObject>}
-       */
-      fetchCountries: () => {
-        const path = `/${pathPrefix}/countries`;
-
-        return this._request(path);
-      },
-
-      /**
-       * @description Get list of event types
-       * @function events.fetchTypes()
-       * @returns {Promise<ReturnObject>}
-       */
-      fetchTypes: () => {
-        const path = `/${pathPrefix}/types`;
-
-        return this._request(path);
       },
     };
   };
@@ -662,7 +552,7 @@ class CoinGecko {
   /**
    * @description Calls related to finance endpoints
    */
-  get finance() {
+  get assetPlatforms() {
     return {
       /**
        * @description List all finance platforms
@@ -672,25 +562,8 @@ class CoinGecko {
        * @param {number} params.page - Page of results (paginated to 100 by default)
        * @returns {Promise<ReturnObject>}
        */
-      fetchPlatforms: (params = {}) => {
-        const path = `/finance_platforms`;
-
-        return this._request(path, params);
-      },
-
-      /**
-       * @description List all finance products
-       * @function finance.fetchProducts()
-       * @param {object} params - Parameters to pass through to the request
-       * @param {number} params.per_page - Total results per page
-       * @param {number} params.page - Page of results (paginated to 100 by default)
-       * @param {string} params.start_at - Start date of the financial products
-       * @param {string} params.end_at - End date of the financial products
-       * @returns {Promise<ReturnObject>}
-       */
-      fetchProducts: (params = {}) => {
-        const path = `/finance_products`;
-
+      all: (params = {}) => {
+        const path = `/asset_platforms`;
         return this._request(path, params);
       },
     };

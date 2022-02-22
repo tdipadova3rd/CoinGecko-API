@@ -1,22 +1,22 @@
 {
-  "name": "coingecko-api-typed",
+  "name": "coingecko-api-typed-pro",
   "version": "1.0.19",
-  "description": "A Node.js wrapper for the CoinGecko API with no dependencies (with generated inline d.ts typings!).",
+  "description": "A Node.js wrapper for the CoinGecko API with no dependencies with generated inline d.ts typings and pro account support.",
   "main": "lib/index.js",
-  "homepage": "https://github.com/stu-dev/CoinGecko-API",
-  "author": "Mark Miscavage",
+  "homepage": "https://github.com/tdipadova3rd/CoinGecko-API",
+  "author": "Mark Miscavage, Stuart Gray, & Tony DiPadova",
   "license": "MIT",
   "scripts": {
-    "test": "mocha --no-timeouts --reporter spec \"./tests/lib/*.js\" \"./tests/lib/**/*.js\"",
+    "test": "mocha --no-timeouts --reporter spec \"./tests/*.js\" \"./tests/**/*.js\"",
     "generate-types": "tsc",
     "prepublishOnly": "npm test && rm -rf lib && cp -r src lib && npm run generate-types"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stu-dev/CoinGecko-API.git"
+    "url": "git+https://github.com/tdipadova3rd/CoinGecko-API.git"
   },
   "bugs": {
-    "url": "https://github.com/stu-dev/CoinGecko-API/issues"
+    "url": "https://github.com/tdipadova3rd/CoinGecko-API/issues"
   },
   "keywords": [
     "coingecko",
@@ -28,7 +28,8 @@
     "nodejs",
     "npm",
     "javascript",
-    "api-client"
+    "api-client",
+    "pro-account"
   ],
   "devDependencies": {
     "chai": "^4.3.4",
