@@ -693,11 +693,11 @@ class CoinGecko {
   };
 
   /**
-     * @description Determines if the pro endpoint should be used
-     * @function _shouldCallPro
-     * @protected
-     * @returns {boolean} - Should call pro endpoint
-     */
+   * @description Determines if the pro endpoint should be used
+   * @function _shouldCallPro
+   * @protected
+   * @returns {boolean} - Should call pro endpoint
+   */
   _shouldCallPro() {
     return this._apiKey !== null;
   }
