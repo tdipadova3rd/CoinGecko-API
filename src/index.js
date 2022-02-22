@@ -35,6 +35,13 @@ const Utils = require('./helpers/utilities');
 class CoinGecko {
 
   /**
+   * @description Construct a CoinGecko client
+   */
+  constructor(apiKey=null) {
+    this._apiKey = apiKey;
+  }
+
+  /**
    * @description Check API server status
    * @function ping
    * @returns {Promise<ReturnObject>}
@@ -686,6 +693,42 @@ class CoinGecko {
   };
 
   /**
+     * @description Determines if the pro endpoint should be used
+     * @function _shouldCallPro
+     * @protected
+     * @returns {boolean} - Should call pro endpoint
+     */
+  _shouldCallPro() {
+    return this._apiKey !== null;
+  }
+
+  /**
+   * @description Add API key to request parameters if it exists
+   * @function _insertApiKeyIntoParams
+   * @protected
+   * @param {string} apiKey - Pro API Key
+   * @param {object} params - Object representing query strings for url parameters
+   * @returns {Object} - {params} Updated params with API key
+   */
+  _insertApiKeyIntoParams(params) {
+    //Insert pro API key if params and API key exist
+    if (Utils.isObject(params) && this._shouldCallPro()) {
+      params['x_cg_pro_api_key'] = this._apiKey;
+    }
+    return params;
+  }
+
+  /**
+   * @description Resolve hostname to pro or normal host
+   * @function _resolveHost
+   * @protected
+   * @returns {string} - Resolved hostname
+   */
+  _resolveHost() {
+    return this._shouldCallPro() ? PRO_HOST : HOST;
+  }
+
+  /**
    * @description Build options for https.request
    * @function _buildRequestOptions
    * @protected
@@ -694,6 +737,9 @@ class CoinGecko {
    * @returns {Object} - {path, method, host, port} Options for request
    */
   _buildRequestOptions(path, params) {
+    //Insert pro API key if params and API key exist
+    params = this._insertApiKeyIntoParams(params);
+
     //Stringify object params if exist
     if (Utils.isObject(params)) params = querystring.stringify(params);
     else params = undefined;
@@ -707,7 +753,7 @@ class CoinGecko {
     return {
       path,
       method: 'GET',
-      host: HOST,
+      host: this._resolveHost(),
       port: 443,
       timeout: CoinGecko.TIMEOUT,
     };
@@ -790,6 +836,12 @@ class CoinGecko {
   * @kind constant
   */
  const HOST = 'api.coingecko.com';
+
+ /**
+ * @description The pro host of the CoinGecko API
+ * @kind constant
+ */
+  const PRO_HOST = 'pro-api.coingecko.com';
  
  /**
   * @description The current version for the CoinGecko API
