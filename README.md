@@ -1,16 +1,16 @@
 # CoinGecko API Client for Node.js
 
 <!-- <span class="badge-travisci"><a href="http://travis-ci.org/miscavage/CoinGecko-API" title="Check this project's build status on TravisCI"><img src="https://img.shields.io/travis/miscavage/CoinGecko-API/master.svg" alt="Travis CI Build Status" /></a></span> -->
-<span class="badge-npmversion"><a href="https://npmjs.org/package/coingecko-api-typed" title="View this project on NPM"><img src="https://img.shields.io/npm/v/coingecko-api-typed.svg" alt="NPM version"/></a></span>
-<span class="badge-npmdownloads"><a href="https://npmjs.org/package/coingecko-api-typed" title="View this project on NPM"><img src="https://img.shields.io/npm/dm/coingecko-api-typed.svg" alt="NPM downloads" /></a></span>
+<span class="badge-npmversion"><a href="https://npmjs.org/package/coingecko-api-typed-pro" title="View this project on NPM"><img src="https://img.shields.io/npm/v/coingecko-api-typed-pro.svg" alt="NPM version"/></a></span>
+<span class="badge-npmdownloads"><a href="https://npmjs.org/package/coingecko-api-typed-pro" title="View this project on NPM"><img src="https://img.shields.io/npm/dm/coingecko-api-typed-pro.svg" alt="NPM downloads" /></a></span>
 
 A Node.js wrapper for the CoinGecko API with no dependencies.
 
 ## • Installation
 
-Latest version: 1.0.19
+Latest version: 1.0.20
 
-`npm install coingecko-api-typed`
+`npm install coingecko-api-typed-pro`
 
 ## • CoinGecko API Documentation
 
@@ -20,7 +20,7 @@ For complete API documentation, up-to-date parameters, responses and errors, ple
 
 ```javascript
 //1. Import coingecko-api-typed
-const CoinGecko = require('coingecko-api-typed');
+const CoinGecko = require('coingecko-api-typed-pro');
 
 //2. Initiate the CoinGecko API Client
 const CoinGeckoClient = new CoinGecko();
@@ -56,40 +56,6 @@ Order results in specific calls by using one of the following values.
 `TRUST_SCORE_DESC` | `CoinGecko.ORDER.TRUST_SCORE_DESC` | Order results by CoinGecko's trust scoring system (descending)
 
 ___
-#### • `CoinGecko.STATUS_UPDATE_CATEGORY`
-Available status update categories to filter by.
-
-| Key | Usage | Description |
-| --- | --- | --- |
-`GENERAL` | `CoinGecko.STATUS_UPDATE_CATEGORY.GENERAL` | Filter status update results by general news
-`MILESTONE` | `CoinGecko.STATUS_UPDATE_CATEGORY.MILESTONE` | Filter status update results by milestones
-`PARTNERSHIP` | `CoinGecko.STATUS_UPDATE_CATEGORY.PARTNERSHIP` | Filter status update results by partnerships
-`EXCHANGE_LISTING` | `CoinGecko.STATUS_UPDATE_CATEGORY.EXCHANGE_LISTING` | Filter status update results by exchange listings
-`SOFTWARE_RELEASE` | `CoinGecko.STATUS_UPDATE_CATEGORY.SOFTWARE_RELEASE` | Filter status update results by software releases
-`FUND_MOVEMENT` | `CoinGecko.STATUS_UPDATE_CATEGORY.FUND_MOVEMENT` | Filter status update results by fund movements
-`NEW_LISTINGS` | `CoinGecko.STATUS_UPDATE_CATEGORY.NEW_LISTINGS` | Filter status update results by new listings
-`EVENT` | `CoinGecko.STATUS_UPDATE_CATEGORY.EVENT` | Filter status update results by events
-
-___
-#### • `CoinGecko.STATUS_UPDATE_PROJECT_TYPE`
-Available status update project types to filter by.
-
-| Key | Usage | Description |
-| --- | --- | --- |
-`COIN` | `CoinGecko.STATUS_UPDATE_PROJECT_TYPE.COIN` | Filter status update results by coins only
-`MARKET` | `CoinGecko.STATUS_UPDATE_PROJECT_TYPE.MARKET` | Filter status update results by markets only
-
-___
-#### • `CoinGecko.EVENT_TYPE`
-List of event types (most recent from `CoinGeckoClient.events.fetchTypes()`)
-
-| Key | Usage | Description |
-| --- | --- | --- |
-`EVENT` | `CoinGecko.EVENT_TYPE.EVENT` | Filter events by _events_ only
-`CONFERENCE` | `CoinGecko.EVENT_TYPE.CONFERENCE` | Filter events by conferences only
-`MEETUP` | `CoinGecko.EVENT_TYPE.MEETUP` | Filter events by meetups only
-
-___
 ## • Making Calls
 All calls using the CoinGeckoClient are asynchronous.
 
@@ -109,11 +75,9 @@ The CoinGeckoClient splits up the currently available calls outline in the offic
 | --- | --- | --- |
 `coins` | `CoinGeckoClient.coins[...]` | Calls related to coins
 `exchanges` | `CoinGeckoClient.exchanges[...]` | Calls related to exchanges
-`statusUpdates` | `CoinGeckoClient.statusUpdates[...]` | Calls related to status updates
-`events` | `CoinGeckoClient.events[...]` | Calls related to events
 `exchangeRates` | `CoinGeckoClient.exchangeRates[...]` | Calls related to exchange rates
 `simple` | `CoinGeckoClient.simple[...]` | Calls related to "simple" endpoints
-`finance` | `CoinGeckoClient.finance[...]` | Calls related to finance endpoints
+`assetPlatforms` | `CoinGeckoClient.assetPlatforms[...]` | Calls related to asset platform endpoints
 `indexes` | `CoinGeckoClient.indexes[...]` | Calls related to index endpoints
 `derivatives` | `CoinGeckoClient.derivatives[...]` | Calls related to derivative endpoints
 
@@ -300,24 +264,6 @@ let data = await CoinGeckoClient.coins.fetchMarketChartRange('bitcoin', {
 ```
 
 ___
-#### `coins.fetchStatusUpdates()`
-Get status updates for a given coin.
-
-Official documentation: https://www.coingecko.com/api/docs/v3#/coins/get_coins__id__status_updates
-
-Params:
-
-- `coinId`: `String` - (Required) The coin id (can be obtained from `coins.list()`) eg. `bitcoin`
-- `params`: `Object` - Parameters to pass through to the request
-- `params.per_page`: `Number` - Total results per page
-- `params.page`: `Number` - Page through results
-
-Usage Example:
-```javascript
-let data = await CoinGeckoClient.coins.fetchStatusUpdates('bitcoin');
-```
-
-___
 #### `coins.fetchCoinContractInfo()`
 Get coin info from contract address.
 
@@ -441,24 +387,6 @@ let data = await CoinGeckoClient.exchanges.fetchTickers('binance');
 ```
 
 ___
-#### `exchanges.fetchStatusUpdates()`
-Get status updates for a given exchange.
-
-Official documentation: https://www.coingecko.com/api/docs/v3#/exchanges_(beta)/get_exchanges__id__status_updates
-
-Params:
-
-- `exchangeId`: `String` - (Required) The exchange id (can be obtained from `exchanges.all()`) eg. `binance`
-- `params`: `Object` - Parameters to pass through to the request
-- `params.page`: `Number` - Page through results
-- `params.per_page`: `Number` - Total results per page
-
-Usage Example:
-```javascript
-let data = await CoinGeckoClient.exchanges.fetchStatusUpdates('binance');
-```
-
-___
 #### `exchanges.fetchVolumeChart()`
 Get volume chart data for a given exchange, returned in BTC
 
@@ -475,76 +403,6 @@ Usage Example:
 let data = await CoinGeckoClient.exchanges.fetchVolumeChart('binance', {
   days: 1,
 });
-```
-
-___
-### • Status Updates
-Calls related to status updates.
-
-
-#### `statusUpdates.all()`
-List all status_updates with data (description, category, created_at, user, user_title and pin).
-
-Official documentation: https://www.coingecko.com/api/docs/v3#/status_updates_(beta)/get_status_updates
-
-Params:
-
-- `params`: `Object` - Parameters to pass through to the request
-- `params.category`: `Number` - Filter results by `CoinGecko.STATUS_UPDATE_CATEGORY[*]`
-- `params.project_type`: `Number` - Filter results by `CoinGecko.STATUS_UPDATE_PROJECT_TYPE[*]` (If left empty returns both status from `coins` and `markets`)
-- `params.page`: `Number` - Page through results
-- `params.per_page`: `Number` - Total results per page
-
-Usage Example:
-```javascript
-let data = await CoinGeckoClient.statusUpdates.all();
-```
-
-___
-### • Events
-Calls related to events.
-
-
-#### `events.all()`
-Get events, paginated by 100.
-
-Official documentation: https://www.coingecko.com/api/docs/v3#/events/get_events
-
-Params:
-
-- `params`: `Object` - Parameters to pass through to the request
-- `params.country_code`: `Number` - country_code of event (eg. `US`). Use `events.fetchHistory()` for list of `country_codes`
-- `params.type`: `String` - Type of event (eg. `Conference`). Use `events.fetchTypes()` for list of types. Or use `CoinGecko.EVENT_TYPE[*]`
-- `params.page`: `Number` - Page through results
-- `params.upcoming_events_only`: `Boolean` - [default: `true`] - Lists only upcoming events
-- `params.from_date`: `String` - Lists events after this date yyyy-mm-dd
-- `params.to_date`: `String` - Lists events before this date yyyy-mm-dd (set `upcoming_events_only` to false if fetching past events)
-
-Usage Example:
-```javascript
-let data = await CoinGeckoClient.events.all();
-```
-
-___
-#### `events.fetchCountries()`
-Get list of event countries.
-
-Official documentation: https://www.coingecko.com/api/docs/v3#/events/get_events_countries
-
-Usage Example:
-```javascript
-let data = await CoinGeckoClient.events.fetchCountries();
-```
-
-___
-#### `events.fetchTypes()`
-Get list of event types.
-
-Official documentation: https://www.coingecko.com/api/docs/v3#/events/get_events_types
-
-Usage Example:
-```javascript
-let data = await CoinGeckoClient.events.fetchTypes();
 ```
 
 ___
@@ -628,14 +486,14 @@ let data = await CoinGeckoClient.simple.fetchTokenPrice({
 ```
 
 ___
-### • Finance
-Calls related to finance endpoints.
+### • Asset Platforms
+Calls related to asset platforms endpoints.
 
 
-#### `finance.fetchPlatforms()`
-List all finance platforms
+#### `assetPlatforms.all()`
+List all asset platforms
 
-Official documentation: https://www.coingecko.com/api/documentations/v3#/finance_(beta)/get_finance_platforms
+Official documentation: https://www.coingecko.com/api/documentations/v3#/asset_platforms
 
 Params:
 
@@ -645,26 +503,7 @@ Params:
 
 Usage Example:
 ```javascript
-let data = await CoinGeckoClient.finance.fetchPlatforms();
-```
-
-___
-#### `finance.fetchProducts()`
-List all finance products
-
-Official documentation: https://www.coingecko.com/api/documentations/v3#/finance_(beta)/get_finance_products
-
-Params:
-
-- `params`: `Object` - Parameters to pass through to the request
-- `params.per_page`: `Number` - Total results per page
-- `params.page`: `Number` - Page of results (paginated to 100 by default)
-- `params.start_at`: `String` - Start date of the financial products
-- `params.end_at`: `String` - End date of the financial products
-
-Usage Example:
-```javascript
-let data = await CoinGeckoClient.finance.fetchProducts();
+let data = await CoinGeckoClient.assetPlatforms.all();
 ```
 
 ___
@@ -695,12 +534,14 @@ Official documentation: https://www.coingecko.com/en/api#operations-indexes%20(b
 
 Params:
 
+- `marketId`: `String` - (Required) The market id (can be obtained from `exchanges.list()`)
 - `indexId`: `String` - (Required) The index id (can be obtained from `indexes.list()`)
 
 Usage Example:
 ```javascript
 let testIndexId = 'BTC'; // as a test
-let data = await CoinGeckoClient.indexes.fetch(testIndexId);
+let marketIndexId = 'ftx';
+let data = await CoinGeckoClient.indexes.fetch(marketIndexId, testIndexId);
 ```
 
 #### `indexes.list()`

@@ -892,51 +892,12 @@ class CoinGecko {
    TRADE_VOLUME_24H_BTC_ASC: 'trade_volume_24h_btc_asc',
    TRADE_VOLUME_24H_BTC_DESC: 'trade_volume_24h_btc_desc',
  };
- 
- /**
-  * @description Available status update category types to filter by
-  * @kind constant
-  */
- const STATUS_UPDATE_CATEGORY = {
-   GENERAL: 'general',
-   MILESTONE: 'milestone',
-   PARTNERSHIP: 'partnership',
-   EXCHANGE_LISTING: 'exchange_listing',
-   SOFTWARE_RELEASE: 'software_release',
-   FUND_MOVEMENT: 'fund_movement',
-   NEW_LISTINGS: 'new_listings',
-   EVENT: 'event',
- };
- 
- /**
-  * @description Available project type options to filter by
-  * @kind constant
-  */
- const STATUS_UPDATE_PROJECT_TYPE = {
-   COIN: 'coin',
-   MARKET: 'market',
- }
- 
- /**
-  * @description List of event types (most recent from /events/type)
-  * @kind constant
-  */
- const EVENT_TYPE = {
-   EVENT: 'Event',
-   CONFERENCE: 'Conference',
-   MEETUP: 'Meetup',
- };
 
 //Set Constants
 CoinGecko.API_VERSION = API_VERSION;
 CoinGecko.REQUESTS_PER_SECOND = REQUESTS_PER_SECOND;
 CoinGecko.ORDER = ORDER;
-CoinGecko.STATUS_UPDATE_CATEGORY = STATUS_UPDATE_CATEGORY;
-CoinGecko.STATUS_UPDATE_PROJECT_TYPE = STATUS_UPDATE_PROJECT_TYPE;
-CoinGecko.EVENT_TYPE = EVENT_TYPE;
 CoinGecko.TIMEOUT = TIMEOUT;
-
-//
 
 module.exports = CoinGecko;
 module.exports.default = CoinGecko;
