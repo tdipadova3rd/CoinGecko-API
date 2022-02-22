@@ -899,7 +899,5 @@ CoinGecko.REQUESTS_PER_SECOND = REQUESTS_PER_SECOND;
 CoinGecko.ORDER = ORDER;
 CoinGecko.TIMEOUT = TIMEOUT;
 
-//
-
 module.exports = CoinGecko;
 module.exports.default = CoinGecko;
