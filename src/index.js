@@ -23,12 +23,13 @@ const Utils = require('./helpers/utilities');
 /**
  * @class CoinGecko
  * @author Mark Miscavage <markmiscavage@protonmail.com>
+ * @author Tony DiPadova <tdipadova3rd@gmail.com>
  * @description A Node.js wrapper for the CoinGecko API with no dependencies. For more information, visit: https://www.coingecko.com/api/docs/v3
  * @example
  *     const CoinGecko = require('coingecko-api-typed');
  *     const CoinGeckoClient = new CoinGecko();
  * @public
- * @version 1.0.19
+ * @version 1.0.20
  * @license MIT
  * @kind class
  */
