@@ -31,6 +31,12 @@ var func = async() => {
 };
 ```
 
+If using the pro endpoint, instantiate like the following.
+
+```javascript
+const CoinGeckoClient = new CoinGecko('COINGECKO_API_KEY');
+```
+
 ## • Constants
 
 This module provides helper constants for use in calls.
