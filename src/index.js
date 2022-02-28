@@ -29,7 +29,7 @@ const Utils = require('./helpers/utilities');
  *     const CoinGecko = require('coingecko-api-typed');
  *     const CoinGeckoClient = new CoinGecko();
  * @public
- * @version 1.0.20
+ * @version 1.0.22
  * @license MIT
  * @kind class
  */
