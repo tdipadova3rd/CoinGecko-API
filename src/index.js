@@ -712,10 +712,14 @@ class CoinGecko {
    * @returns {Object} - {params} Updated params with API key
    */
   _insertApiKeyIntoParams(params) {
-    //Insert pro API key if params and API key exist
-    if (Utils.isObject(params) && this._shouldCallPro()) {
+    //Insert pro API key if API key exists
+    if (this._shouldCallPro()) {
+      if (!Utils.isObject(params)) {
+        params = {};
+      }
       params['x_cg_pro_api_key'] = this._apiKey;
     }
+    
     return params;
   }
 
